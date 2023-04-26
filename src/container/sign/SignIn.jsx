@@ -38,24 +38,30 @@ const SignIn = (props) => {
   return (
     <div className='SignIn'>
       <h2>Login</h2>
-      <div className='loginBody'>
-        <input
-          placeholder='Email'
-          type='email'
-          value={loginInputState.email}
-          onChange={(e) => changeInputHandler('email', e.target.value)}
-        />
-        <input
-          placeholder='Password'
-          name='password'
-          type='password'
-          value={loginInputState.password}
-          onChange={(e) => changeInputHandler('password', e.target.value)}
-        />
-        <button className='login_btn' onClick={login}>
-          로그인
-        </button>
-      </div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <div className='loginBody'>
+          <input
+            placeholder='Email'
+            type='email'
+            value={loginInputState.email}
+            onChange={(e) => changeInputHandler('email', e.target.value)}
+          />
+          <input
+            placeholder='Password'
+            name='password'
+            type='password'
+            value={loginInputState.password}
+            onChange={(e) => changeInputHandler('password', e.target.value)}
+          />
+          <button className='login_btn' onClick={login} type='submit'>
+            로그인
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

@@ -152,3 +152,78 @@
 .loginBody .login_btn:hover {
   background-color: aliceblue;
 }
+
+/* Profile 내 정보 */
+
+.MyPage {
+  width: 45%;
+  height: 300px;
+  background-color: #fdfbf9;
+  text-align: center;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 15px;
+  border: 3px solid black;
+  padding: 20px;
+  display: flex;
+}
+
+.MyPage .profile_img_section {
+  width: 40%;
+  /* background-color: antiquewhite; */
+}
+
+.MyPage .profile_img_section img {
+  width: 70%;
+  height: 50%;
+  border-radius: 50%;
+  padding: 10%;
+  margin-top: 15%;
+}
+
+.MyPage .profile_section {
+  width: 60%;
+  background-color: beige;
+  text-align: left;
+  padding: 25px;
+  position: relative;
+  border-radius: 15px;
+}
+
+.MyPage .profile_section input {
+  width: 80%;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.MyPage .profile_section .nickname_span {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.MyPage .profile_section .email_span {
+  font-size: large;
+}
+
+.MyPage .profile_section section {
+  margin-top: 20px;
+}
+
+.MyPage .profile_section button {
+  background-color: azure;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 15px;
+
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.MyPage .profile_section button:hover {
+  background-color: aliceblue;
+}

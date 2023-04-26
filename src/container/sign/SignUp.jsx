@@ -14,7 +14,7 @@ const SignUp = (props) => {
   const setUser = useSetRecoilState(userInfo);
 
   const [isEmailCheck, setIsEmailCheck] = useState(false);
-  const [isEmailRegExp, setIsEmailRegExp] = useState(false);
+  const [isEmailRegExp, setIsEmailRegExp] = useState(true);
 
   const emailRef = useRef();
   const navigate = useNavigate();
@@ -29,11 +29,13 @@ const SignUp = (props) => {
 
     // 형식에 맞는 경우 true 리턴
     // const [isEmailRegExp, setIsEmailRegExp] = useState(true);
-    console.log('이메일 유효성 검사 :: ', regExp.test(e.target.value));
-    if (!regExp.test(e.target.value) && !isEmailRegExp) {
-      setIsEmailRegExp(!isEmailRegExp);
-    } else if (regExp.test(e.target.value) && isEmailRegExp) {
-      setIsEmailRegExp(!isEmailRegExp);
+
+    if (!regExp.test(e.target.value)) {
+      console.log('이메일 유효성 불합격 :: ', regExp.test(e.target.value));
+      setIsEmailRegExp(regExp.test(e.target.value));
+    } else {
+      console.log('이메일 유효성 합격 :: ', regExp.test(e.target.value));
+      setIsEmailRegExp(regExp.test(e.target.value));
     }
   };
 
@@ -41,15 +43,8 @@ const SignUp = (props) => {
     try {
       const emailCheckCom = await postEmailCheck(signUpInputState.email);
 
-      if (!!isEmailRegExp) {
-        alert('이메일 형식을 확인해주세요');
-        emailRef.current.focus();
-        return;
-      }
-
       if (emailCheckCom.success) {
         alert('사용 가능한 이메일 입니다.');
-        setIsEmailRegExp(true);
         setIsEmailCheck(true);
       }
     } catch (error) {
@@ -107,7 +102,18 @@ const SignUp = (props) => {
           onChange={(e) => changeInputHandler(e.target.value, 'email')}
         />
 
-        <button className='emailCheck_btn' onClick={emailCheck}>
+        <button
+          className='emailCheck_btn'
+          onClick={(e) => {
+            if (!isEmailRegExp) {
+              alert('이메일 형식을 확인해주세요');
+              emailRef.current.focus();
+              return;
+            } else {
+              emailCheck();
+            }
+          }}
+        >
           중복체크
         </button>
         <input
@@ -124,7 +130,7 @@ const SignUp = (props) => {
           onChange={(e) => changeInputHandler(e.target.value, 'nickName')}
         />
         <div className='emailRegExp'>
-          {isEmailRegExp && !isEmailCheck && <p>이메일 형식을 확인해 주세요</p>}
+          {!isEmailRegExp && <p>이메일 형식을 확인해 주세요</p>}
         </div>
         <button className='signUp_btn' onClick={signUp}>
           회원가입
