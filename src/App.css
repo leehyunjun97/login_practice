@@ -1,38 +1,154 @@
-.App {
-  text-align: center;
-}
+/* header */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #fdfbf9;
+  justify-content: space-between;
+  border: 2px solid black;
 }
 
-.App-link {
-  color: #61dafb;
+.Header h2 {
+  padding-left: 20px;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Header .signDiv {
+  width: 40%;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.signDiv button {
+  height: 100%;
+  width: 22%;
+  border: none;
+  background-color: #fdfbf9;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 200ms ease;
+  color: black;
+  white-space: nowrap;
+}
+
+.signDiv button:hover {
+  font-size: 18px;
+}
+
+/* signup 회원가입 */
+
+.SignUp {
+  width: 40%;
+  height: 500px;
+  background-color: #fdfbf9;
+  text-align: center;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 15px;
+  border: 3px solid black;
+  padding: 20px;
+}
+
+.signBody {
+  margin-top: 10%;
+}
+
+.signBody input {
+  width: 80%;
+  height: 40px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.signBody .email_input {
+  width: 55%;
+}
+
+.signBody .emailCheck_btn {
+  width: 20%;
+  margin-left: 5%;
+  height: 45px;
+  border-radius: 5px;
+  background-color: rgb(238, 170, 92);
+  color: #fdfbf9;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  white-space: nowrap;
+}
+
+.signBody .emailCheck_btn:hover {
+  background-color: chocolate;
+}
+
+.signBody .signUp_btn {
+  background-color: azure;
+  font-weight: bold;
+  margin-top: 5%;
+  width: 80%;
+  height: 40px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.signBody .signUp_btn:hover {
+  background-color: aliceblue;
+}
+
+.emailRegExp {
+  color: rgb(224, 63, 10);
+  font-weight: bold;
+}
+
+.emailRegExp p {
+  padding: 0px;
+  margin: 0px;
+}
+
+/* SignIn 로그인 */
+
+.SignIn {
+  width: 40%;
+  height: 500px;
+  background-color: #fdfbf9;
+  text-align: center;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 15px;
+  border: 3px solid black;
+  padding: 20px;
+}
+
+.loginBody {
+  margin-top: 10%;
+}
+
+.loginBody input {
+  width: 80%;
+  height: 40px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.loginBody .login_btn {
+  background-color: azure;
+  font-weight: bold;
+  margin-top: 5%;
+  width: 80%;
+  height: 40px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.loginBody .login_btn:hover {
+  background-color: aliceblue;
 }
