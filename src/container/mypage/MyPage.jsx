@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const MyPage = (props) => {
   const [userInfoData, setUserInfo] = useRecoilState(userInfo);
   const [isNicknameEdit, setIsNicknameEdit] = useState(false);
   const [newNicknameState, setNewNicknameState] = useState('');
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userInfo._id) {
+      alert('로그인을 해주세요');
+      navigate('/signin');
+    }
+  }, []);
 
   const isNicknameEditHandler = () => {
     setIsNicknameEdit(!isNicknameEdit);
@@ -26,7 +36,6 @@ const MyPage = (props) => {
     }
   };
 
-  // console.log(value);
   return (
     <div className='MyPage'>
       <div className='profile_img_section'>
@@ -58,7 +67,6 @@ const MyPage = (props) => {
             <button
               onClick={(e) => {
                 if (window.confirm(`수정하시겠사와요?`)) {
-                  // window.location.replace('mypage');
                   setUserInfo({ ...userInfo, nickName: newNicknameState });
                   editNickname();
                   isNicknameEditHandler();
