@@ -5,6 +5,7 @@ import Home from './container/home/page/Home';
 import MyPage from './container/mypage/MyPage';
 import SignUp from './container/sign/SignUp';
 import SignIn from './container/sign/SignIn';
+import PrivateRouter from './router/PrivateRouter';
 
 function App() {
   return (
@@ -12,7 +13,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Header />}>
           <Route index element={<Home />} />
-          <Route path='mypage' element={<MyPage />} />
+
+          {/* 로그인이 필요한 페이지 */}
+          <PrivateRouter />
+
           <Route path='signup' element={<SignUp />} />
           <Route path='signin' element={<SignIn />} />
         </Route>

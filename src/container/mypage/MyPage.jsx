@@ -13,13 +13,6 @@ const MyPage = (props) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!id) {
-      alert('로그인을 해주세요');
-      navigate('/signin');
-    }
-  }, [id]);
-
   const isNicknameEditHandler = () => {
     setIsNicknameEdit(!isNicknameEdit);
   };
