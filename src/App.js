@@ -6,21 +6,28 @@ import MyPage from './container/mypage/MyPage';
 import SignUp from './container/sign/SignUp';
 import SignIn from './container/sign/SignIn';
 import PrivateRouter from './router/PrivateRouter';
+import PublicRouter from './router/PublicRouter';
 
 function App() {
   return (
     <div className='App'>
-      <Routes>
+      <Header />
+      <PublicRouter />
+
+      <PrivateRouter />
+
+      {/* <Routes>
         <Route path='/' element={<Header />}>
           <Route index element={<Home />} />
 
-          {/* 로그인이 필요한 페이지 */}
-          <PrivateRouter />
+          <Route element={PrivateRouter}>
+            <Route path='/mypage' element={<MyPage />} />
+          </Route>
 
           <Route path='signup' element={<SignUp />} />
           <Route path='signin' element={<SignIn />} />
         </Route>
-      </Routes>
+      </Routes> */}
     </div>
   );
 }

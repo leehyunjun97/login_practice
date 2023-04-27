@@ -13,7 +13,11 @@ const PrivateRouter = (props) => {
     }
   }, [id]);
 
-  return <Route path='mypage' element={<MyPage />} />;
+  return (
+    <Routes>
+      <Route path='mypage' element={<MyPage />} />
+    </Routes>
+  );
 };
 
 export default PrivateRouter;
