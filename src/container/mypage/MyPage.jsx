@@ -34,7 +34,10 @@ const MyPage = (props) => {
   return (
     <div className='MyPage'>
       <div className='profile_img_section'>
-        <img src='img/profile_dog.png' alt='profile_img' />
+        <img
+          src={`${process.env.PUBLIC_URL}/img/profile_dog.png`}
+          alt='profile_img'
+        />
       </div>
       <div className='profile_section'>
         {isNicknameEdit ? (

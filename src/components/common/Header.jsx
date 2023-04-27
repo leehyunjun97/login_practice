@@ -51,7 +51,7 @@ const Header = (props) => {
             <>
               <button>
                 <Link
-                  to='/mypage'
+                  to='/user/mypage'
                   className='links'
                   style={{ textDecoration: 'none', color: 'black' }}
                 >

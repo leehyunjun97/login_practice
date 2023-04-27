@@ -11,23 +11,18 @@ import PublicRouter from './router/PublicRouter';
 function App() {
   return (
     <div className='App'>
-      <Header />
-      <PublicRouter />
-
-      <PrivateRouter />
-
-      {/* <Routes>
+      <Routes>
         <Route path='/' element={<Header />}>
           <Route index element={<Home />} />
 
-          <Route element={PrivateRouter}>
-            <Route path='/mypage' element={<MyPage />} />
+          <Route path='user' element={<PrivateRouter />}>
+            <Route path='mypage' element={<MyPage />} />
           </Route>
 
           <Route path='signup' element={<SignUp />} />
           <Route path='signin' element={<SignIn />} />
         </Route>
-      </Routes> */}
+      </Routes>
     </div>
   );
 }

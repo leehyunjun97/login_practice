@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import MyPage from '../container/mypage/MyPage';
 
 const PrivateRouter = (props) => {
@@ -13,11 +13,7 @@ const PrivateRouter = (props) => {
     }
   }, [id]);
 
-  return (
-    <Routes>
-      <Route path='mypage' element={<MyPage />} />
-    </Routes>
-  );
+  return <Outlet />;
 };
 
 export default PrivateRouter;
