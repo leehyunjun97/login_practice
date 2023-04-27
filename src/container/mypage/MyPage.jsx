@@ -12,7 +12,8 @@ const MyPage = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userInfo._id) {
+    if (!userInfoData._id) {
+      console.log(userInfoData._id);
       alert('로그인을 해주세요');
       navigate('/signin');
     }

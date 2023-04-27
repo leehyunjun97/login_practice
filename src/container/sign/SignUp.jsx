@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { postEmailCheck, postSignUp } from './sign';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
@@ -11,6 +11,7 @@ const SignUp = (props) => {
     nickName: '',
   });
 
+  // console.log('들어왓니', userInfoData);
   const setUser = useSetRecoilState(userInfo);
 
   const [isEmailCheck, setIsEmailCheck] = useState(false);
@@ -18,6 +19,14 @@ const SignUp = (props) => {
 
   const emailRef = useRef();
   const navigate = useNavigate();
+  const id = localStorage.getItem('id');
+
+  useEffect(() => {
+    if (id) {
+      console.log('니뭐야', id);
+      navigate('/');
+    }
+  }, [id]);
 
   const changeInputHandler = (value, key) => {
     setSignUpInputState((prev) => ({ ...prev, [key]: value }));
@@ -25,7 +34,7 @@ const SignUp = (props) => {
 
   const checkEmail = (e) => {
     const regExp =
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,}$/i;
 
     // 형식에 맞는 경우 true 리턴
 
@@ -55,30 +64,20 @@ const SignUp = (props) => {
 
   const signUp = async () => {
     try {
-      if (
-        isEmailCheck &&
-        isEmailRegExp &&
-        !(signUpInputState.password.length < 6) &&
-        !(signUpInputState.nickName.length < 6)
-      ) {
-        const signCom = await postSignUp(
-          signUpInputState.email,
-          signUpInputState.password,
-          signUpInputState.nickName
-        );
+      const signCom = await postSignUp(
+        signUpInputState.email,
+        signUpInputState.password,
+        signUpInputState.nickName
+      );
 
-        if (signCom.success) {
-          alert('회원가입이 되었습니다.');
-          const { _id, email, nickName } = signCom.user;
-          localStorage.setItem('id', _id);
+      if (signCom.success) {
+        alert('회원가입이 되었습니다.');
+        const { _id, email, nickName } = signCom.user;
+        localStorage.setItem('id', _id);
 
-          setUser({ _id, email, nickName });
+        setUser({ _id, email, nickName });
 
-          navigate('/');
-        }
-      } else {
-        alert('형식을 확인해주세요');
-        emailRef.current.focus();
+        navigate('/');
       }
     } catch (error) {
       console.log(error.message);
@@ -92,7 +91,6 @@ const SignUp = (props) => {
         <input
           className='email_input'
           type='email'
-          disabled={isEmailCheck}
           onBlur={checkEmail}
           placeholder='example@naver.com'
           ref={emailRef}
@@ -131,7 +129,23 @@ const SignUp = (props) => {
         <div className='emailRegExp'>
           {!isEmailRegExp && <p>이메일 형식을 확인해 주세요</p>}
         </div>
-        <button className='signUp_btn' onClick={signUp}>
+        <button
+          className='signUp_btn'
+          onClick={(e) => {
+            if (signUpInputState.password.length < 6) {
+              alert('패스워드는 6글자 이상 입력해주세요');
+              return;
+            } else if (signUpInputState.nickName.length < 6) {
+              alert('닉네임은 6글자 이상 입력해주세요');
+              return;
+            } else if (!isEmailCheck) {
+              alert('이메일 중복 체크를 해주세요');
+              return;
+            } else {
+              signUp();
+            }
+          }}
+        >
           회원가입
         </button>
       </div>
