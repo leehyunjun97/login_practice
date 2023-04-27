@@ -9,15 +9,16 @@ const MyPage = (props) => {
   const [isNicknameEdit, setIsNicknameEdit] = useState(false);
   const [newNicknameState, setNewNicknameState] = useState('');
 
+  const id = localStorage.getItem('id');
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userInfoData._id) {
-      console.log(userInfoData._id);
+    if (!id) {
       alert('로그인을 해주세요');
       navigate('/signin');
     }
-  }, []);
+  }, [id]);
 
   const isNicknameEditHandler = () => {
     setIsNicknameEdit(!isNicknameEdit);
@@ -67,7 +68,10 @@ const MyPage = (props) => {
           <>
             <button
               onClick={(e) => {
-                if (window.confirm(`수정하시겠사와요?`)) {
+                if (newNicknameState.length < 6) {
+                  alert('닉네임은 6글자 이상 사용해주세요');
+                  return;
+                } else if (window.confirm(`수정하시겠습니까`)) {
                   setUserInfo({ ...userInfo, nickName: newNicknameState });
                   editNickname();
                   isNicknameEditHandler();
@@ -77,7 +81,14 @@ const MyPage = (props) => {
             >
               수정하기
             </button>
-            <button onClick={isNicknameEditHandler}>수정취소</button>
+            <button
+              onClick={(e) => {
+                setNewNicknameState('');
+                isNicknameEditHandler();
+              }}
+            >
+              수정취소
+            </button>
           </>
         ) : (
           <>

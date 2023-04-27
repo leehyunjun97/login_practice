@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { postEmailCheck, postSignUp } from './sign';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 
@@ -11,7 +11,6 @@ const SignUp = (props) => {
     nickName: '',
   });
 
-  // console.log('들어왓니', userInfoData);
   const setUser = useSetRecoilState(userInfo);
 
   const [isEmailCheck, setIsEmailCheck] = useState(false);
@@ -22,10 +21,14 @@ const SignUp = (props) => {
   const id = localStorage.getItem('id');
 
   useEffect(() => {
-    if (id) {
-      console.log('니뭐야', id);
-      navigate('/');
-    }
+    const loader = async () => {
+      const user = await id;
+      if (user) {
+        return redirect('/');
+      }
+      return null;
+    };
+    loader();
   }, [id]);
 
   const changeInputHandler = (value, key) => {
