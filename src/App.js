@@ -19,8 +19,10 @@ function App() {
             <Route path='mypage' element={<MyPage />} />
           </Route>
 
-          <Route path='signup' element={<SignUp />} />
-          <Route path='signin' element={<SignIn />} />
+          <Route path='/' element={<PublicRouter />}>
+            <Route path='signup' element={<SignUp />} />
+            <Route path='signin' element={<SignIn />} />
+          </Route>
         </Route>
       </Routes>
     </div>

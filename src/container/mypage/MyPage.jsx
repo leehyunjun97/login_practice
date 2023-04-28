@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const MyPage = (props) => {
   const [userInfoData, setUserInfo] = useRecoilState(userInfo);
   const [isNicknameEdit, setIsNicknameEdit] = useState(false);
   const [newNicknameState, setNewNicknameState] = useState('');
-
-  const id = localStorage.getItem('id');
-
-  const navigate = useNavigate();
 
   const isNicknameEditHandler = () => {
     setIsNicknameEdit(!isNicknameEdit);
@@ -71,6 +66,7 @@ const MyPage = (props) => {
                   setUserInfo({ ...userInfo, nickName: newNicknameState });
                   editNickname();
                   isNicknameEditHandler();
+                  window.location.replace('/user/mypage');
                 }
               }}
               style={{ right: '22%' }}

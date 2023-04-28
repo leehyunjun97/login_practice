@@ -1,18 +1,16 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Home from '../container/home/page/Home';
-import SignUp from '../container/sign/SignUp';
-import SignIn from '../container/sign/SignIn';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const PublicRouter = (props) => {
-  useEffect(() => {}, []);
-  return (
-    <Routes>
-      <Route index element={<Home />} />
-      <Route path='signup' element={<SignUp />} />
-      <Route path='signin' element={<SignIn />} />
-    </Routes>
-  );
+  const id = localStorage.getItem('id');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (id) {
+      navigate('/');
+    }
+  }, [id]);
+  return <Outlet />;
 };
 
 export default PublicRouter;

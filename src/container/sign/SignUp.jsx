@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { postEmailCheck, postSignUp } from './sign';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 
@@ -18,18 +18,6 @@ const SignUp = (props) => {
 
   const emailRef = useRef();
   const navigate = useNavigate();
-  const id = localStorage.getItem('id');
-
-  useEffect(() => {
-    const loader = async () => {
-      const user = await id;
-      if (user) {
-        return redirect('/');
-      }
-      return null;
-    };
-    loader();
-  }, [id]);
 
   const changeInputHandler = (value, key) => {
     setSignUpInputState((prev) => ({ ...prev, [key]: value }));

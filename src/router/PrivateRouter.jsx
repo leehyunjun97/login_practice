@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
-import MyPage from '../container/mypage/MyPage';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const PrivateRouter = (props) => {
   const id = localStorage.getItem('id');
