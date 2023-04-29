@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-const PublicRouter = (props) => {
+const PublicRouter = () => {
   const id = localStorage.getItem('id');
   const navigate = useNavigate();
 
@@ -9,7 +9,7 @@ const PublicRouter = (props) => {
     if (id) {
       navigate('/');
     }
-  }, [id]);
+  }, [id, navigate]);
   return <Outlet />;
 };
 

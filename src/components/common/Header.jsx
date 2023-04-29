@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 import axios from 'axios';
 
-const Header = (props) => {
-  const [userInfoData, setUserInfo] = useRecoilState(userInfo);
-
+const Header = () => {
+  const setUserInfo = useSetRecoilState(userInfo);
+  const userInfoReset = useResetRecoilState(userInfo);
   const id = localStorage.getItem('id');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -16,24 +18,28 @@ const Header = (props) => {
           const profileCom = await axios.get(
             `http://localhost:5000/users/my?id=${id}`
           );
-          console.log(profileCom.data.user);
           const { _id, email, nickName } = profileCom.data.user;
 
           setUserInfo({ _id, email, nickName });
         } catch (error) {
           console.log(error.response.data.message);
+          alert('유저를 찾을 수 없습니다.');
+          localStorage.removeItem('id');
+          navigate('/');
         }
       };
       myProfile();
     }
-  }, [id]);
+  }, [id, setUserInfo, navigate]);
 
   const logout = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
       localStorage.removeItem('id');
-      window.location.replace('/');
+      userInfoReset();
+      navigate('/');
     }
   };
+
   return (
     <div>
       <div className='Header'>

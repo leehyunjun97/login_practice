@@ -1,8 +1,8 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { userInfo } from '../../../recoil/user/user';
 
-const Home = (props) => {
-  const [userInfoData, setUserInfo] = useRecoilState(userInfo);
+const Home = () => {
+  const userInfoData = useRecoilValue(userInfo);
   const id = localStorage.getItem('id');
 
   return (

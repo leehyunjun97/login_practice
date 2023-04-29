@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 
-const SignUp = (props) => {
+const SignUp = () => {
   const [signUpInputState, setSignUpInputState] = useState({
     email: '',
     password: '',

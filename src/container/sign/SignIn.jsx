@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { postSignIn } from './sign';
 import { useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
+import { useNavigate } from 'react-router-dom';
 
-const SignIn = (props) => {
+const SignIn = () => {
   const [loginInputState, setLoginInputState] = useState({
     email: '',
     password: '',
   });
 
   const setUser = useSetRecoilState(userInfo);
+  const navigate = useNavigate();
 
   const changeInputHandler = (key, value) => {
     setLoginInputState((prev) => ({ ...prev, [key]: value }));
@@ -28,7 +30,7 @@ const SignIn = (props) => {
 
         setUser({ _id, email, nickName });
 
-        window.location.replace('/');
+        navigate('/');
       }
     } catch (error) {
       console.log(error);

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const MyPage = (props) => {
+const MyPage = () => {
   const [userInfoData, setUserInfo] = useRecoilState(userInfo);
   const [isNicknameEdit, setIsNicknameEdit] = useState(false);
   const [newNicknameState, setNewNicknameState] = useState('');
+  const navigate = useNavigate();
 
   const isNicknameEditHandler = () => {
     setIsNicknameEdit(!isNicknameEdit);
@@ -21,6 +23,9 @@ const MyPage = (props) => {
           nickName: newNicknameState,
         }
       );
+      if (editNickCom) {
+        alert('수정 완료');
+      }
     } catch (error) {
       console.log(error.response.data.message);
     }
@@ -66,7 +71,7 @@ const MyPage = (props) => {
                   setUserInfo({ ...userInfo, nickName: newNicknameState });
                   editNickname();
                   isNicknameEditHandler();
-                  window.location.replace('/user/mypage');
+                  navigate('/user/mypage');
                 }
               }}
               style={{ right: '22%' }}
@@ -75,7 +80,6 @@ const MyPage = (props) => {
             </button>
             <button
               onClick={(e) => {
-                setNewNicknameState('');
                 isNicknameEditHandler();
               }}
             >
@@ -84,7 +88,14 @@ const MyPage = (props) => {
           </>
         ) : (
           <>
-            <button onClick={isNicknameEditHandler}>닉네임 수정하기</button>
+            <button
+              onClick={() => {
+                setNewNicknameState(userInfoData.nickName);
+                isNicknameEditHandler();
+              }}
+            >
+              닉네임 수정하기
+            </button>
           </>
         )}
       </div>
