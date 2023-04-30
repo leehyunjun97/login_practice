@@ -53,6 +53,15 @@ const Header = () => {
           </Link>
         </h2>
         <div className='signDiv'>
+          <button>
+            <Link
+              to='/post'
+              className='links'
+              style={{ textDecoration: 'none', color: 'black' }}
+            >
+              포스트
+            </Link>
+          </button>
           {id ? (
             <>
               <button>

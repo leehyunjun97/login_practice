@@ -227,3 +227,60 @@
 .MyPage .profile_section button:hover {
   background-color: aliceblue;
 }
+
+/* MainPost */
+
+.MainPost {
+  text-align: center;
+  width: 60%;
+  height: 500px;
+  margin: auto;
+  padding-left: 2%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.MainPost .PostItem {
+  width: 30%;
+  height: 280px;
+  margin: 1%;
+  background-color: #fdfaf6;
+  border: 2.5px solid black;
+  border-radius: 15px;
+  transition: all 250ms ease;
+  cursor: pointer;
+}
+
+.MainPost .PostItem:hover {
+  background-color: #f8f1e8;
+}
+
+.MainPost .PostItem .post_img {
+  border-radius: 25px;
+  width: 90%;
+  margin: auto;
+}
+
+.MainPost .PostItem img {
+  width: 100%;
+  height: 50%;
+  margin-top: 10%;
+  border: 25px;
+}
+
+.MainPost .PostItem .post_content {
+  text-align: left;
+  padding: 6%;
+  display: block;
+}
+
+.MainPost .PostItem .post_content h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.MainPost .PostItem .post_content .post_writer {
+  font-weight: 500;
+  font-size: small;
+}

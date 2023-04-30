@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
   const [userInfoData, setUserInfo] = useRecoilState(userInfo);
   const [isNicknameEdit, setIsNicknameEdit] = useState(false);
   const [newNicknameState, setNewNicknameState] = useState('');
-  const navigate = useNavigate();
 
   const isNicknameEditHandler = () => {
     setIsNicknameEdit(!isNicknameEdit);
