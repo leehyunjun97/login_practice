@@ -170,7 +170,6 @@
 
 .MyPage .profile_img_section {
   width: 40%;
-  /* background-color: antiquewhite; */
 }
 
 .MyPage .profile_img_section img {
@@ -283,4 +282,78 @@
 .MainPost .PostItem .post_content .post_writer {
   font-weight: 500;
   font-size: small;
+}
+
+/* Post Detail */
+
+.PostDetail {
+  width: 45%;
+  height: 550px;
+  background-color: #fdfbf9;
+  text-align: center;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 15px;
+  border: 3px solid black;
+  padding: 20px;
+  position: relative;
+}
+
+.PostDetail .post_img_section {
+  width: 90%;
+  margin: auto;
+  margin-top: 5%;
+}
+
+.PostDetail .post_img_section img {
+  width: 70%;
+  height: 50%;
+  border: 3px solid black;
+}
+
+.PostDetail .post_section {
+  width: 82%;
+  height: 35%;
+  text-align: left;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.PostDetail .post_section .postDetail_writer {
+  font-size: medium;
+}
+
+.PostDetail .post_section .postDetail_content_section {
+  margin-top: 5px;
+  font-weight: bold;
+  border-top: 3px solid black;
+  padding: 20px;
+  padding-left: 0px;
+}
+
+.PostDetail .post_btn_section {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  width: 40%;
+}
+
+.PostDetail .post_btn_section button {
+  width: 40%;
+  background-color: rgb(197, 254, 254);
+  font-weight: bold;
+  margin-left: 15px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  color: #201f1ece;
+}
+
+.PostDetail .post_btn_section button:hover {
+  transform: scale(1.1);
+}
+
+.PostDetail .post_btn_section .post_remove_btn {
+  background-color: rgba(238, 121, 92, 0.945);
 }

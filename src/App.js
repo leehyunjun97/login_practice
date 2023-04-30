@@ -8,6 +8,7 @@ import SignIn from './container/sign/SignIn';
 import PrivateRouter from './router/PrivateRouter';
 import PublicRouter from './router/PublicRouter';
 import MainPost from './container/post/MainPost';
+import PostDetail from './container/post/PostDetail';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           </Route>
 
           <Route path='post' element={<MainPost />} />
+          <Route path='post/detail/:id' element={<PostDetail />} />
         </Route>
       </Routes>
     </div>

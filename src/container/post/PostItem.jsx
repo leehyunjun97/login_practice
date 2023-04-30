@@ -1,8 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PostItem = (postProps) => {
+
+  const navigate = useNavigate();
+
   return (
-    <div className='PostItem'>
+    <div
+      className='PostItem'
+      onClick={(e) => {
+        navigate(`detail/${postProps._id}`);
+      }}
+    >
       <div className='post_img'>
         <img src={`${process.env.PUBLIC_URL}/img/post.png`} alt='postImg' />
       </div>

@@ -18,8 +18,6 @@ const MainPost = () => {
     getPostList();
   }, [setPostListState]);
 
-  console.log(postListState);
-
   return (
     <div className='MainPost'>
       {postListState.map((it) => (
