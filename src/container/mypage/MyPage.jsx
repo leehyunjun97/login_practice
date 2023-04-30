@@ -68,10 +68,10 @@ const MyPage = () => {
                   alert('닉네임은 6글자 이상 사용해주세요');
                   return;
                 } else if (window.confirm(`수정하시겠습니까`)) {
-                  setUserInfo({ ...userInfo, nickName: newNicknameState });
+                  setUserInfo({ ...userInfoData, nickName: newNicknameState });
                   editNickname();
                   isNicknameEditHandler();
-                  navigate('/user/mypage');
+                  console.log(userInfoData);
                 }
               }}
               style={{ right: '22%' }}
