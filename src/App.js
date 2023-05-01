@@ -9,6 +9,7 @@ import PrivateRouter from './router/PrivateRouter';
 import PublicRouter from './router/PublicRouter';
 import MainPost from './container/post/MainPost';
 import PostDetail from './container/post/PostDetail';
+import PostEditor from './container/post/PostEditor';
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
         <Route path='/' element={<Header />}>
           <Route index element={<Home />} />
 
-          <Route path='user' element={<PrivateRouter />}>
-            <Route path='mypage' element={<MyPage />} />
+          <Route path='/' element={<PrivateRouter />}>
+            <Route path='user/mypage' element={<MyPage />} />
+            <Route path='post/edit' element={<PostEditor />} />
           </Route>
 
           <Route path='/' element={<PublicRouter />}>

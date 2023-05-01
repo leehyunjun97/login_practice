@@ -7,6 +7,6 @@ export const getUser = async (id) => {
     );
     return findUserCom.data;
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error.response.data);
   }
 };

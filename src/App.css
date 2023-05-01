@@ -1,3 +1,7 @@
+.App {
+  text-align: center;
+}
+
 /* header */
 
 .Header {
@@ -232,12 +236,13 @@
 .MainPost {
   text-align: center;
   width: 60%;
-  height: 500px;
+  height: 600px;
   margin: auto;
   padding-left: 2%;
   display: flex;
   flex-wrap: wrap;
   margin-top: 30px;
+  position: relative;
 }
 
 .MainPost .PostItem {
@@ -284,6 +289,27 @@
   font-size: small;
 }
 
+.MainPost .edit_post_section {
+  position: fixed;
+  right: 25px;
+  bottom: 20px;
+}
+
+.MainPost .edit_post_section button {
+  background-color: azure;
+  font-weight: bold;
+  width: 160px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.MainPost .edit_post_section button:hover {
+  background-color: aliceblue;
+}
+
 /* Post Detail */
 
 .PostDetail {
@@ -317,6 +343,14 @@
   text-align: left;
   margin: auto;
   margin-top: 30px;
+}
+
+.post_span_section {
+  width: 100%;
+  padding: 0;
+  display: flex;
+
+  justify-content: space-between;
 }
 
 .PostDetail .post_section .postDetail_writer {
@@ -356,4 +390,63 @@
 
 .PostDetail .post_btn_section .post_remove_btn {
   background-color: rgba(238, 121, 92, 0.945);
+}
+
+/* Post Editor */
+
+.PostEditor {
+  width: 40%;
+  height: 500px;
+  background-color: #fdfbf9;
+  text-align: center;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 15px;
+  border: 3px solid black;
+  padding: 20px;
+}
+
+.PostEditor .title_input {
+  width: 80%;
+  height: 40px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.PostEditor textarea {
+  width: 80%;
+  height: 70px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+  resize: none;
+}
+
+.PostEditor .share_btn_section {
+  width: 40%;
+  height: 70px;
+  margin: auto;
+  font-weight: bold;
+  font-size: medium;
+  justify-content: space-between;
+  display: flex;
+}
+
+.PostEditor .create_btn {
+  background-color: azure;
+  font-weight: bold;
+  margin-top: 5%;
+  width: 80%;
+  height: 40px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.PostEditor .create_btn:hover {
+  background-color: aliceblue;
 }

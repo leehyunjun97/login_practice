@@ -13,6 +13,6 @@ export const postListDetail = atom({
     title: '',
     content: '',
     writer: '',
-    date: new Date(),
+    date: '',
   },
 });

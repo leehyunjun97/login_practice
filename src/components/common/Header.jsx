@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { userInfo } from '../../recoil/user/user';
-import axios from 'axios';
+import { getUser } from '../../scripts/montampUser';
 
 const Header = () => {
   const setUserInfo = useSetRecoilState(userInfo);
@@ -15,14 +15,11 @@ const Header = () => {
     if (id) {
       const myProfile = async () => {
         try {
-          const profileCom = await axios.get(
-            `http://localhost:5000/users/my?id=${id}`
-          );
-          const { _id, email, nickName } = profileCom.data.user;
-
+          const profileCom = await getUser(id);
+          const { _id, email, nickName } = profileCom.user;
           setUserInfo({ _id, email, nickName });
         } catch (error) {
-          console.log(error.response.data.message);
+          console.log(error.message);
           alert('유저를 찾을 수 없습니다.');
           localStorage.removeItem('id');
           navigate('/');

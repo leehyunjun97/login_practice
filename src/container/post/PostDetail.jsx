@@ -30,9 +30,13 @@ const PostDetail = () => {
         <img src={`${process.env.PUBLIC_URL}/img/post.png`} alt='post_img' />
       </div>
       <div className='post_section'>
-        <span className='postDetail_writer'>
-          {postDetailState.writer}'s post
-        </span>
+        <div className='post_span_section'>
+          <span className='postDetail_writer'>
+            {postDetailState.writer}'s post
+          </span>
+          <span className='postDetail_date'>{postDetailState.date}</span>
+        </div>
+
         <div className='postDetail_content_section'>
           <span className='postDetail_content'>{postDetailState.content}</span>
         </div>
