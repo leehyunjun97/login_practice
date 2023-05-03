@@ -22,8 +22,6 @@ const MainPost = () => {
     getPostList();
   }, [setPostListState]);
 
-  console.log(userInfoData);
-
   return (
     <div className='MainPost'>
       {userInfoData._id

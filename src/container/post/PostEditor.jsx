@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { uploadPost } from './scripts/post';
+import { useNavigate } from 'react-router-dom';
 
 const PostEditor = (props) => {
   const [postEditorState, setPostEditorState] = useState({
@@ -9,6 +10,9 @@ const PostEditor = (props) => {
   });
 
   const userId = localStorage.getItem('id');
+  const navigate = useNavigate();
+  const titleRef = useRef();
+  const contentRef = useRef();
 
   const editorStateHandler = (key, value) => {
     setPostEditorState((prev) => ({ ...prev, [key]: value }));
@@ -33,6 +37,7 @@ const PostEditor = (props) => {
       );
       alert('작성 완료');
       console.log(createPostCom);
+      navigate(`/post/detail/${createPostCom.postItem._id}`);
     } catch (error) {
       console.log(error);
     }
@@ -48,6 +53,7 @@ const PostEditor = (props) => {
       >
         <div className=''>
           <input
+            ref={titleRef}
             className='title_input'
             placeholder='제목'
             name='title'
@@ -57,6 +63,7 @@ const PostEditor = (props) => {
             }}
           />
           <textarea
+            ref={contentRef}
             placeholder='내용'
             name='content'
             value={postEditorState.content}
@@ -67,6 +74,7 @@ const PostEditor = (props) => {
           <section className='share_btn_section'>
             <label>
               <input
+                checked
                 type='radio'
                 name='share_radio'
                 value={postEditorState.shere}
@@ -88,7 +96,20 @@ const PostEditor = (props) => {
               <span>비공개</span>
             </label>
           </section>
-          <button className='create_btn' onClick={onCreatePost}>
+          <button
+            className='create_btn'
+            onClick={() => {
+              if (postEditorState.title === '') {
+                alert('제목을 입력해주세요');
+                titleRef.current.focus();
+              } else if (postEditorState.content === '') {
+                alert('컨텐츠를 입력해주세요');
+                contentRef.current.focus();
+              } else {
+                onCreatePost();
+              }
+            }}
+          >
             작성하기
           </button>
         </div>

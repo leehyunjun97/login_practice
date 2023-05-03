@@ -235,7 +235,7 @@
 
 .MainPost {
   text-align: center;
-  width: 60%;
+  width: 65%;
   height: 600px;
   margin: auto;
   padding-left: 2%;
@@ -363,6 +363,14 @@
   border-top: 3px solid black;
   padding: 20px;
   padding-left: 0px;
+}
+
+.PostDetail .post_section .postDetail_content_section .post_newContent {
+  width: 103%;
+  height: 150px;
+  resize: none;
+  font-weight: bold;
+  font-size: large;
 }
 
 .PostDetail .post_btn_section {

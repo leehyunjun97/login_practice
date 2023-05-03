@@ -20,3 +20,27 @@ export const uploadPost = async (userId, title, content, sharePost, date) => {
     throw new Error(error.message);
   }
 };
+
+export const deletePost = async (id) => {
+  try {
+    const deletePostCom = await axios.delete(
+      `http://localhost:5000/post/${id}`
+    );
+    return deletePostCom;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const editPost = async (id, title, content) => {
+  try {
+    const editPostCom = await axios.put(`http://localhost:5000/post/edit`, {
+      id,
+      title,
+      content,
+    });
+    return editPostCom;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
