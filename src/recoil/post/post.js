@@ -11,6 +11,7 @@ export const postListDetail = atom({
     _id: '',
     userId: '',
     title: '',
+    postImage: '',
     content: '',
     writer: '',
     date: '',

@@ -1,7 +1,15 @@
 import axios from 'axios';
 
-export const uploadPost = async (userId, title, content, sharePost, date) => {
+export const uploadPost = async (
+  userId,
+  title,
+  content,
+  image,
+  sharePost,
+  date
+) => {
   const writer = userId;
+  const postImage = image;
   try {
     const uploadPostCom = await axios.post(
       'http://localhost:5000/post/upload',
@@ -9,7 +17,7 @@ export const uploadPost = async (userId, title, content, sharePost, date) => {
         userId,
         title,
         content,
-        postImage: '아무개',
+        postImage,
         sharePost,
         date,
         writer,

@@ -21,10 +21,18 @@ const PostDetail = () => {
           const getPostDetailCom = await axios.get(
             `http://localhost:5000/post/detail/${params.id}`
           );
-          const { _id, userId, title, content, date } =
+          const { _id, userId, title, content, date, postImage } =
             getPostDetailCom.data.postItem;
           const writer = getPostDetailCom.data.postItem.writer.nickName;
-          setPostDetailState({ _id, userId, title, content, writer, date });
+          setPostDetailState({
+            _id,
+            userId,
+            title,
+            content,
+            writer,
+            date,
+            postImage,
+          });
         } catch (error) {
           alert('존재하지 않는 포스트입니다.');
           navigate('/post');
@@ -66,7 +74,7 @@ const PostDetail = () => {
   return (
     <div className='PostDetail'>
       <div className='post_img_section'>
-        <img src={`${process.env.PUBLIC_URL}/img/post.png`} alt='post_img' />
+        <img src={postDetailState.postImage} alt='post_img' />
       </div>
       <div className='post_section'>
         <div className='post_span_section'>

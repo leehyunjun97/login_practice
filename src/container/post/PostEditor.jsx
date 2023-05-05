@@ -1,18 +1,28 @@
 import React, { useRef, useState } from 'react';
 import { uploadPost } from './scripts/post';
 import { useNavigate } from 'react-router-dom';
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from 'firebase/storage';
+import { storage } from '../../scripts/firebase';
 
-const PostEditor = (props) => {
+const PostEditor = () => {
   const [postEditorState, setPostEditorState] = useState({
     title: '',
     content: '',
+    image: '',
     shere: true,
   });
+  const [postImg, setPostImg] = useState();
 
   const userId = localStorage.getItem('id');
   const navigate = useNavigate();
   const titleRef = useRef();
   const contentRef = useRef();
+  const postImgRef = useRef();
 
   const editorStateHandler = (key, value) => {
     setPostEditorState((prev) => ({ ...prev, [key]: value }));
@@ -28,16 +38,42 @@ const PostEditor = (props) => {
       today.getDate();
 
     try {
-      const createPostCom = await uploadPost(
-        userId,
-        postEditorState.title,
-        postEditorState.content,
-        postEditorState.shere,
-        dateFormat
-      );
+      const now = new Date();
+
+      if (postImg) {
+        const postImgRef = ref(storage, `images/post/${userId}_${now}`);
+        await uploadBytes(postImgRef, postImg).then(() => {
+          const uploadTask = uploadBytesResumable(postImgRef, postImg);
+          getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
+            setPostEditorState({ ...postEditorState, image: url });
+            const createPostCom = await uploadPost(
+              userId,
+              postEditorState.title,
+              postEditorState.content,
+              url,
+              postEditorState.shere,
+              dateFormat
+            );
+            console.log(createPostCom);
+            navigate(`/post/detail/${createPostCom.postItem._id}`);
+          });
+        });
+      } else {
+        const url =
+          'https://firebasestorage.googleapis.com/v0/b/montamp-be910.appspot.com/o/images%2Fdefault.png?alt=media&token=c83dc44d-ef15-4941-b192-ee5eed5bc873';
+        const createPostCom = await uploadPost(
+          userId,
+          postEditorState.title,
+          postEditorState.content,
+          url,
+          postEditorState.shere,
+          dateFormat
+        );
+        console.log(createPostCom);
+        navigate(`/post/detail/${createPostCom.postItem._id}`);
+      }
+
       alert('작성 완료');
-      console.log(createPostCom);
-      navigate(`/post/detail/${createPostCom.postItem._id}`);
     } catch (error) {
       console.log(error);
     }
@@ -96,13 +132,23 @@ const PostEditor = (props) => {
               <span>비공개</span>
             </label>
           </section>
+          <div>
+            <input
+              ref={postImgRef}
+              type='file'
+              accept='image/*'
+              onChange={(e) => {
+                setPostImg(postImgRef.current.files[0]);
+              }}
+            />
+          </div>
           <button
             className='create_btn'
             onClick={() => {
-              if (postEditorState.title === '') {
+              if (postEditorState.title.trim() === '') {
                 alert('제목을 입력해주세요');
                 titleRef.current.focus();
-              } else if (postEditorState.content === '') {
+              } else if (postEditorState.content.trim() === '') {
                 alert('컨텐츠를 입력해주세요');
                 contentRef.current.focus();
               } else {

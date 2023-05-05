@@ -123,10 +123,10 @@ const SignUp = () => {
         <button
           className='signUp_btn'
           onClick={(e) => {
-            if (signUpInputState.password.length < 6) {
+            if (signUpInputState.password.trim().length < 6) {
               alert('패스워드는 6글자 이상 입력해주세요');
               return;
-            } else if (signUpInputState.nickName.length < 6) {
+            } else if (signUpInputState.trim().nickName.length < 6) {
               alert('닉네임은 6글자 이상 입력해주세요');
               return;
             } else if (!isEmailCheck) {

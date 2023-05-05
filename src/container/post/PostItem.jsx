@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const PostItem = (postProps) => {
-
   const navigate = useNavigate();
 
   return (
@@ -13,7 +12,7 @@ const PostItem = (postProps) => {
       }}
     >
       <div className='post_img'>
-        <img src={`${process.env.PUBLIC_URL}/img/post.png`} alt='postImg' />
+        <img src={postProps.postImage} alt='postImg' />
       </div>
       <div className='post_content'>
         <h4>{postProps.title}</h4>
