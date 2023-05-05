@@ -38,10 +38,8 @@ const PostEditor = () => {
       today.getDate();
 
     try {
-      const now = new Date();
-
       if (postImg) {
-        const postImgRef = ref(storage, `images/post/${userId}_${now}`);
+        const postImgRef = ref(storage, `images/post/${userId}_${today}`);
         await uploadBytes(postImgRef, postImg).then(() => {
           const uploadTask = uploadBytesResumable(postImgRef, postImg);
           getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
