@@ -16,6 +16,9 @@ const PostEditor = () => {
     image: '',
     shere: true,
   });
+
+  const [postShereState, setPostShereState] = useState(true);
+
   const [postImg, setPostImg] = useState();
 
   const userId = localStorage.getItem('id');
@@ -108,11 +111,11 @@ const PostEditor = () => {
           <section className='share_btn_section'>
             <label>
               <input
-                checked
+                checked={postEditorState.shere === true}
                 type='radio'
                 name='share_radio'
                 value={postEditorState.shere}
-                onChange={() => {
+                onChange={(e) => {
                   editorStateHandler('shere', true);
                 }}
               />
@@ -120,10 +123,11 @@ const PostEditor = () => {
             </label>
             <label>
               <input
+                checked={postEditorState.shere === false}
                 type='radio'
                 name='share_radio'
                 value={postEditorState.shere}
-                onChange={() => {
+                onChange={(e) => {
                   editorStateHandler('shere', false);
                 }}
               />
@@ -139,6 +143,13 @@ const PostEditor = () => {
                 setPostImg(postImgRef.current.files[0]);
               }}
             />
+            <button
+              onClick={(e) => {
+                postImgRef.current.value = '';
+              }}
+            >
+              사진삭제
+            </button>
           </div>
           <button
             className='create_btn'

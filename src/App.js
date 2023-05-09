@@ -8,8 +8,8 @@ import SignIn from './container/sign/SignIn';
 import PrivateRouter from './router/PrivateRouter';
 import PublicRouter from './router/PublicRouter';
 import MainPost from './container/post/MainPost';
-import PostDetail from './container/post/PostDetail';
 import PostEditor from './container/post/PostEditor';
+import PostDetail from './container/post/PostDetail';
 
 function App() {
   return (
