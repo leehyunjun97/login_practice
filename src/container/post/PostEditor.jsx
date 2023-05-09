@@ -17,9 +17,8 @@ const PostEditor = () => {
     shere: true,
   });
 
-  const [postShereState, setPostShereState] = useState(true);
-
   const [postImg, setPostImg] = useState();
+  const [postImgSrc, setPostImgSrc] = useState(null);
 
   const userId = localStorage.getItem('id');
   const navigate = useNavigate();
@@ -29,6 +28,18 @@ const PostEditor = () => {
 
   const editorStateHandler = (key, value) => {
     setPostEditorState((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const fileHandler = () => {
+    const file = postImgRef.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      setPostImgSrc(reader.result);
+    };
+
+    setPostImg(file);
   };
 
   const onCreatePost = async () => {
@@ -140,16 +151,27 @@ const PostEditor = () => {
               type='file'
               accept='image/*'
               onChange={(e) => {
-                setPostImg(postImgRef.current.files[0]);
+                fileHandler();
               }}
             />
             <button
               onClick={(e) => {
                 postImgRef.current.value = '';
+                setPostImgSrc('');
               }}
             >
               사진삭제
             </button>
+          </div>
+          <div className='img_preview'>
+            <img
+              src={
+                postImgSrc
+                  ? postImgSrc
+                  : `${process.env.PUBLIC_URL}/img/post.png`
+              }
+              alt='미리보기'
+            />
           </div>
           <button
             className='create_btn'

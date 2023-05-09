@@ -405,7 +405,7 @@
 
 .PostEditor {
   width: 40%;
-  height: 500px;
+  height: 700px;
   background-color: #fdfbf9;
   text-align: center;
   margin: auto;
@@ -441,6 +441,17 @@
   font-size: medium;
   justify-content: space-between;
   display: flex;
+}
+
+.PostEditor .img_preview {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.PostEditor .img_preview img {
+  width: 100%;
+  max-height: 240px;
 }
 
 .PostEditor .create_btn {
