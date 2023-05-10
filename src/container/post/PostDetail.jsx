@@ -4,15 +4,25 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { postListDetail } from '../../recoil/post/post';
 import { deletePost, editPost } from './scripts/post';
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from 'firebase/storage';
+import { storage } from '../../scripts/firebase';
 
 const PostDetail = () => {
   const [postDetailState, setPostDetailState] = useRecoilState(postListDetail);
   const [isEditPostState, setIsEditPostState] = useState(false);
   const [newContentState, setNewContentState] = useState('');
+  const [postImgSrc, setPostImgSrc] = useState(null);
+
   const params = useParams();
   const id = localStorage.getItem('id');
   const navigate = useNavigate();
   const newContentRef = useRef();
+  const newImgRef = useRef();
 
   useEffect(() => {
     if (params.id) {
@@ -46,6 +56,16 @@ const PostDetail = () => {
     setIsEditPostState(!isEditPostState);
   };
 
+  const fileHandler = () => {
+    const file = newImgRef.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      setPostImgSrc(reader.result);
+    };
+  };
+
   const onDeletePost = async () => {
     try {
       const deletePostCom = await deletePost(params.id);
@@ -59,13 +79,33 @@ const PostDetail = () => {
 
   const onEditPost = async () => {
     try {
-      const editPostCom = await editPost(
-        params.id,
-        postDetailState.title,
-        newContentState
-      );
-      console.log(editPostCom);
-      alert('수정 완료');
+      if (postImgSrc) {
+        const postImgRef = ref(storage, `images/post/${id}_${new Date()}`);
+        await uploadBytes(postImgRef, newImgRef.current.files[0]).then(() => {
+          const uploadTask = uploadBytesResumable(
+            postImgRef,
+            newImgRef.current.files[0]
+          );
+          getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
+            const editPostCom = await editPost(
+              params.id,
+              postDetailState.title,
+              newContentState,
+              url
+            );
+            console.log(editPostCom);
+            alert('수정 완료');
+          });
+        });
+      } else {
+        const editPostCom = await editPost(
+          params.id,
+          postDetailState.title,
+          newContentState
+        );
+        console.log(editPostCom);
+        alert('수정 완료');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -73,8 +113,27 @@ const PostDetail = () => {
 
   return (
     <div className='PostDetail'>
-      <div className='post_img_section'>
-        <img src={postDetailState.postImage} alt='post_img' />
+      <div
+        className='post_img_section'
+        onClick={(e) => {
+          if (isEditPostState) {
+            newImgRef.current.click();
+          }
+        }}
+      >
+        <input
+          ref={newImgRef}
+          type='file'
+          accept='image/*'
+          hidden
+          onChange={(e) => {
+            fileHandler();
+          }}
+        />
+        <img
+          src={postImgSrc ? postImgSrc : postDetailState.postImage}
+          alt='post_img'
+        />
       </div>
       <div className='post_section'>
         <div className='post_span_section'>

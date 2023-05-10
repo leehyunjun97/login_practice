@@ -405,7 +405,7 @@
 
 .PostEditor {
   width: 40%;
-  height: 700px;
+  height: 730px;
   background-color: #fdfbf9;
   text-align: center;
   margin: auto;
@@ -427,7 +427,7 @@
 .PostEditor textarea {
   width: 80%;
   height: 70px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   border-radius: 5px;
   font-size: 15px;
   resize: none;
@@ -435,7 +435,7 @@
 
 .PostEditor .share_btn_section {
   width: 40%;
-  height: 70px;
+  height: 50px;
   margin: auto;
   font-weight: bold;
   font-size: medium;
@@ -446,12 +446,13 @@
 .PostEditor .img_preview {
   width: 90%;
   margin: auto;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .PostEditor .img_preview img {
   width: 100%;
   max-height: 240px;
+  border: 3px solid black;
 }
 
 .PostEditor .create_btn {

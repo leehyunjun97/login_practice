@@ -40,15 +40,29 @@ export const deletePost = async (id) => {
   }
 };
 
-export const editPost = async (id, title, content) => {
-  try {
-    const editPostCom = await axios.put(`http://localhost:5000/post/edit`, {
-      id,
-      title,
-      content,
-    });
-    return editPostCom;
-  } catch (error) {
-    throw new Error(error.message);
+export const editPost = async (id, title, content, postImage) => {
+  if (!postImage) {
+    try {
+      const editPostCom = await axios.put(`http://localhost:5000/post/edit`, {
+        id,
+        title,
+        content,
+      });
+      return editPostCom;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  } else {
+    try {
+      const editPostCom = await axios.put(`http://localhost:5000/post/edit`, {
+        id,
+        title,
+        content,
+        postImage,
+      });
+      return editPostCom;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 };
